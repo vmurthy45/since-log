@@ -1,5 +1,5 @@
 /* Since Log service worker — precache the app shell so it opens with zero signal. */
-const CACHE = "sincelog-v2";
+const CACHE = "sincelog-v3";
 const ASSETS = [
   "./",
   "./index.html",
