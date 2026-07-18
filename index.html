@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Since Log</title>
+<meta name="description" content="Count the days since the moments that matter — habits, milestones, anniversaries.">
+<meta name="theme-color" content="#6b5bd2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Since Log">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <h1><span class="logo" aria-hidden="true"></span>Since Log</h1>
+    <button id="themeBtn" class="icon-btn" title="Theme" aria-label="Toggle theme">◐</button>
+  </header>
+
+  <main id="main">
+
+    <!-- COUNTERS (home) -->
+    <section id="tab-counters" class="tab">
+      <div class="filters" id="catFilters" role="tablist" aria-label="Filter by category"></div>
+      <div class="list-tools">
+        <div class="hint" id="countersSummary"></div>
+        <button type="button" class="sort-btn" id="sortBtn" aria-label="Change sort"></button>
+      </div>
+      <div id="counterList"></div>
+    </section>
+
+    <!-- ADD / EDIT -->
+    <section id="tab-add" class="tab" hidden>
+      <h2 id="addTitle">Add event</h2>
+      <form id="eventForm" autocomplete="off">
+        <div class="field">
+          <label for="eName">Event</label>
+          <input type="text" id="eName" placeholder="e.g. Quit smoking" enterkeyhint="next" maxlength="60" required>
+        </div>
+        <div class="field">
+          <label for="eDate">Start date</label>
+          <input type="date" id="eDate" required>
+          <div class="hint" id="dateHint"></div>
+        </div>
+        <div class="field">
+          <label id="eCatLabel">Category</label>
+          <div class="chips cat-chips" id="eCat" role="radiogroup" aria-labelledby="eCatLabel"></div>
+        </div>
+        <div class="field" id="customCatWrap" hidden>
+          <label for="customCat">Name your category</label>
+          <input type="text" id="customCat" placeholder="e.g. Travel, Car, Fitness" maxlength="24" enterkeyhint="done">
+        </div>
+        <div class="field">
+          <label for="eNotes">Notes</label>
+          <input type="text" id="eNotes" placeholder="optional" maxlength="80">
+        </div>
+        <div class="live-calc" id="livePreview" hidden></div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary" id="saveBtn">Save event</button>
+          <button type="button" class="btn" id="cancelEditBtn" hidden>Cancel</button>
+          <button type="button" class="btn danger" id="deleteBtn" hidden>Delete</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- STATS -->
+    <section id="tab-stats" class="tab" hidden>
+      <div class="tiles" id="tiles"></div>
+      <div class="card">
+        <h3>By category <span class="sub">how many events you track in each</span></h3>
+        <div id="catChart"></div>
+      </div>
+      <div class="card">
+        <h3>Milestones ahead <span class="sub">the next round number for each event</span></h3>
+        <div id="upcomingList"></div>
+      </div>
+      <div class="card" id="insightsCard">
+        <h3>Insights</h3>
+        <ul class="insights" id="insightsList"></ul>
+      </div>
+    </section>
+
+    <!-- DATA -->
+    <section id="tab-data" class="tab" hidden>
+      <h2>Data</h2>
+      <div class="card">
+        <h3>Backup &amp; export</h3>
+        <p class="hint" id="dataSummary"></p>
+        <div class="stack">
+          <button class="btn primary" id="exportBtn">Download CSV</button>
+          <button class="btn" id="shareBtn" hidden>Share CSV (save to OneDrive)</button>
+        </div>
+        <p class="hint">Your events live on this device only. Export now and then so a lost phone never means lost history.</p>
+      </div>
+      <div class="card">
+        <h3>Import</h3>
+        <p class="hint">Restore from a CSV exported by this app (replaces current data).</p>
+        <input type="file" id="importFile" accept=".csv,text/csv" hidden>
+        <button class="btn" id="importBtn">Import CSV…</button>
+      </div>
+      <div class="card">
+        <h3>Danger zone</h3>
+        <div class="stack">
+          <button class="btn danger" id="wipeBtn">Erase all data</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Sections">
+    <button data-tab="counters" class="on"><span class="ic">◷</span>Counters</button>
+    <button data-tab="add"><span class="ic">＋</span>Add</button>
+    <button data-tab="stats"><span class="ic">◔</span>Stats</button>
+    <button data-tab="data"><span class="ic">⇅</span>Data</button>
+  </nav>
+
+  <div id="toast" class="toast" hidden></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
